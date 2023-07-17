@@ -11,7 +11,7 @@ user_router = APIRouter()
 
 async def _create_new_user(body: UserCreate, db) -> ShowUser:
     async with db as session:
-        async with session():
+        async with session.begin():
             user_dal = UserDAL(session)
             user = await user_dal.create_user(
                 name=body.name,

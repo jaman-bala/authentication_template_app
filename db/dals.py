@@ -17,3 +17,6 @@ class UserDAL:
         self.db_session.add(new_user)
         await self.db_session.flush()
         return new_user
+
+async def delete_user(self, user_id: UUID) -> Uvion[UUID, None]:
+    query = update(User).\
