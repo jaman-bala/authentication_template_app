@@ -39,12 +39,13 @@ async def _delete_user(user_id, db) -> Union[UUID, None]:
             return deleted_user_id
 
 
-async def _update_user(body, db) -> Union[UUID, None]:
+async def _update_user(updated_user_params: dict, user_id: UUID, db) -> Union[UUID, None]:
     async with db as session:
         async with session.begin():
             user_dal = UserDAL(session)
             updated_user_id = await user_dal.update_user(
-                **body.dict()
+                user_id=user_id,
+                **updated_user_params
             )
             return updated_user_id
 
@@ -91,10 +92,11 @@ async def get_user_by_id(user_id: UUID, db: AsyncSession = Depends(get_db)) -> S
 async def update_user_by_id(
         user_id: UUID, body: UpdateUserRequest, db: AsyncSession = Depends(get_db)
 ) -> UpdateUserResponse:
-    if body.dict(exclude_none=True) == {}:
+    updated_user_params = body.dict(exclude_none=True)
+    if updated_user_params == {}:
         raise HTTPException(status_code=422, detail="At least one parameter for user update info should be provided")
     user = await _get_user_by_id(user_id, db)
     if user is None:
         raise HTTPException(status_code=404, detail=f"User wuth id {user_id} not found.")
-    updated_user_id = await _update_user(body=body, db=db)
+    updated_user_id = await _update_user(updated_user_params=updated_user_params, db=db, user_id=user_id)
     return UpdateUserResponse(updated_user_id=updated_user_id)
