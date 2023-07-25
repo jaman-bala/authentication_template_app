@@ -1,9 +1,13 @@
 import uuid
-from sqlalchemy import Column, String, Boolean
-from sqlalchemy_utils import UUIDType
+
+from sqlalchemy import Boolean
+from sqlalchemy import Column
+from sqlalchemy import String
 from sqlalchemy.orm import declarative_base
+from sqlalchemy_utils import UUIDType
 
 Base = declarative_base()
+
 
 class User(Base):
     __tablename__ = "users"
@@ -13,3 +17,4 @@ class User(Base):
     surname = Column(String, nullable=False)
     email = Column(String, nullable=False, unique=True)
     is_active = Column(Boolean(), default=True)
+    hashed_password = Column(String, nullable=False)

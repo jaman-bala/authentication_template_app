@@ -1,9 +1,12 @@
 import re
 import uuid
-
 from typing import Optional
+
 from fastapi import HTTPException
-from pydantic import BaseModel, EmailStr, validator, constr
+from pydantic import BaseModel
+from pydantic import constr
+from pydantic import EmailStr
+from pydantic import validator
 
 
 LETTER_MATCH_PATTERN = re.compile(r"[a-zA-Zа-яА-Я\-]+$")
@@ -74,3 +77,6 @@ class UpdateUserRequest(BaseModel):
         return value
 
 
+class Token(BaseModel):
+    access_token: str
+    token_type: str
