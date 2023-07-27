@@ -39,7 +39,7 @@ async def delete_user(
     deleted_user_id = await _delete_user(user_id, db)
     if deleted_user_id is None:
         raise HTTPException(
-            status_code=404, detail=f"User wuth id {user_id} not found."
+            status_code=404, detail=f"User with id {user_id} not found."
         )
     return DeleteUserResponse(deleted_user_id=deleted_user_id)
 
@@ -49,7 +49,7 @@ async def get_user_by_id(user_id: UUID, db: AsyncSession = Depends(get_db)) -> S
     user = await _get_user_by_id(user_id, db)
     if user is None:
         raise HTTPException(
-            status_code=404, detail=f"User wuth id {user_id} not found."
+            status_code=404, detail=f"User with id {user_id} not found."
         )
     return user
 
@@ -67,13 +67,13 @@ async def update_user_by_id(
     user = await _get_user_by_id(user_id, db)
     if user is None:
         raise HTTPException(
-            status_code=404, detail=f"User wuth id {user_id} not found."
+            status_code=404, detail=f"User with id {user_id} not found."
         )
     try:
         updated_user_id = await _update_user(
-            updated_user_params=updated_user_params, db=db, user_id=user_id
+            updated_user_params=updated_user_params, session=db, user_id=user_id
         )
     except IntegrityError as err:
         logger.error(err)
-        raise HTTPException(status_code=503, detail=f"databse error: {err}")
+        raise HTTPException(status_code=503, detail=f"database error: {err}")
     return UpdateUserResponse(updated_user_id=updated_user_id)

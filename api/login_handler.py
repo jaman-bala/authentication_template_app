@@ -3,11 +3,11 @@ from fastapi import APIRouter
 from fastapi import Depends
 from fastapi import HTTPException
 from fastapi import status
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
 
 import settings
-
+from api.actions.auth import authenticate_user
 from api.schemas import Token
 from db.models import User
 from db.session import get_db
@@ -42,8 +42,8 @@ async def login_for_access_token(
 
 
 
-@login_router.get("/test_auth_endpoint")
-async def sample_endpoint_under_jwt(
-    current_user: User = Depends(get_current_user_from_token),
-):
-    return {"Success": True, "current_user": current_user}
+# @login_router.get("/test_auth_endpoint")
+# async def sample_endpoint_under_jwt(
+#     current_user: User = Depends(get_current_user_from_token),
+# ):
+#     return {"Success": True, "current_user": current_user}

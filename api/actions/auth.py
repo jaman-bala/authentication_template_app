@@ -5,7 +5,7 @@ from hashing import Hasher
 from fastapi import Depends
 from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordBearer
 from fastapi import status
 
 import settings
