@@ -1,13 +1,13 @@
-version: "3.8"
+version: "3.2"
 services:
   db:
     container_name: db
     restart: always
     image: postgres:12.4-alpine
     environment:
-      - POSTGRES_USER=superuser
-      - POSTGRES_PASSWORD=ZAQ!@#$%tgb
-      - POSTGRES_DB=all_bd
+      - POSTGRES_USER=polls_superuser
+      - POSTGRES_PASSWORD=password-polls
+      - POSTGRES_DB=polls_superuser
     ports:
       - "5433:5433"
     networks:
@@ -17,9 +17,9 @@ services:
     restart: always
     image: postgres:12.4-alpine
     environment:
-      - POSTGRES_USER=superuser_test
-      - POSTGRES_PASSWORD=ZAQ!@#$%tgb
-      - POSTGRES_DB=all_bd_test
+      - POSTGRES_USER=polls_test
+      - POSTGRES_PASSWORD=password-test
+      - POSTGRES_DB=polls_test
     ports:
       - "5434:5433"
     networks:
