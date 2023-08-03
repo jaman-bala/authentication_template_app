@@ -4,7 +4,8 @@ from uuid import UUID
 
 from api.schemas import ShowUser
 from api.schemas import UserCreate
-from db.dals import UserDAL, PortalRole
+from db.dals import UserDAL
+from db.models import PortalRole
 from db.models import User
 from hashing import Hasher
 

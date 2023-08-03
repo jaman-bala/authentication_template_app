@@ -52,7 +52,7 @@ class DeleteUserResponse(BaseModel):
     deleted_user_id: uuid.UUID
 
 
-class UpdateUserResponse(BaseModel):
+class UpdatedUserResponse(BaseModel):
     updated_user_id: uuid.UUID
 
 

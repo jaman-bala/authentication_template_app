@@ -1,4 +1,3 @@
-from enum import Enum
 from typing import Union, List
 from uuid import UUID
 
@@ -8,12 +7,7 @@ from sqlalchemy import update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from db.models import User
-
-
-class PortalRole(str, Enum):
-    ROLE_PORTAL_USER = "ROLE_PORTAL_USER"
-    ROLE_PORTAL_ADMIN = "ROLE_PORTAL_ADMIN"
-    ROLE_PORTAL_SUPERADMIN = "ROLE_PORTAL_SUPERADMIN"
+from db.models import PortalRole
 
 
 class UserDAL:
