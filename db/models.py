@@ -36,9 +36,9 @@ class User(Base):
     def is_admin(self) -> bool:
         return PortalRole.ROLE_PORTAL_ADMIN in self.roles
 
-    def add_admin_privileges(self) -> list:
+    def add_admin_privileges(self):
         if not self.is_admin:
             return self.roles + [PortalRole.ROLE_PORTAL_ADMIN]
 
-    def remove_admin_privileges_from_model(self) -> list:
+    def remove_admin_privileges_from_model(self):
         return [role for role in self.roles if role != PortalRole.ROLE_PORTAL_ADMIN]
