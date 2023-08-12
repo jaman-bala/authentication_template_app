@@ -18,7 +18,7 @@ from api.schemas import ShowUser
 from api.schemas import UpdateUserRequest
 from api.schemas import UpdatedUserResponse
 from api.schemas import UserCreate
-from db.models import User
+from db.dals import User
 from db.session import get_db
 
 
