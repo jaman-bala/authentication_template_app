@@ -5,10 +5,10 @@ import pytest
 
 async def test_create_user(client, get_user_from_database):
     user_data = {
-        "name": "Nikolai",
-        "surname": "Sviridov",
-        "email": "lol@kek.com",
-        "password": "SamplePass1!",
+        "name": "Don",
+        "surname": "Pedro",
+        "email": "mamalak@gmail.com",
+        "password": "Mamalashka1!",
     }
     resp = client.post("/user/", data=json.dumps(user_data))
     data_from_resp = resp.json()
@@ -29,15 +29,15 @@ async def test_create_user(client, get_user_from_database):
 
 async def test_create_user_duplicate_email_error(client, get_user_from_database):
     user_data = {
-        "name": "Nikolai",
-        "surname": "Sviridov",
-        "email": "lol@kek.com",
-        "password": "SamplePass1!",
+        "name": "Don",
+        "surname": "Pedro",
+        "email": "mamalak@gmail.com",
+        "password": "Mamalashka1!",
     }
     user_data_same = {
-        "name": "Petr",
-        "surname": "Petrov",
-        "email": "lol@kek.com",
+        "name": "Conor",
+        "surname": "Habib",
+        "email": "ufc@ucf.com",
         "password": "SamplePass1!",
     }
     resp = client.post("/user/", data=json.dumps(user_data))
@@ -95,17 +95,17 @@ async def test_create_user_duplicate_email_error(client, get_user_from_database)
             },
         ),
         (
-            {"name": 123, "surname": 456, "email": "lol"},
+            {"name": 123, "surname": 456, "email": "mamalak"},
             422,
             {"detail": "Name should contains only letters"},
         ),
         (
-            {"name": "Nikolai", "surname": 456, "email": "lol"},
+            {"name": "Don", "surname": 456, "email": "mamalak"},
             422,
             {"detail": "Surname should contains only letters"},
         ),
         (
-            {"name": "Nikolai", "surname": "Sviridov", "email": "lol"},
+            {"name": "Don", "surname": "Pedro", "email": "mamalak"},
             422,
             {
                 "detail": [
