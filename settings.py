@@ -7,7 +7,7 @@ REAL_DATABASE_URL = env.str(
     "REAL_DATABASE_URL",
     default="postgresql+asyncpg://polls_superuser:password-polls@0.0.0.0:5432/polls_db",
 )
-# APP_PORT = env.int("APP_PORT")
+APP_PORT = env.int("APP_PORT")
 
 
 TEST_DATABASE_URL = env.str(
@@ -25,4 +25,4 @@ TEST_DATABASE_URL = env.str(
 SECRET_KEY: str = env.str("SECRET_KEY", default="secret_key")
 ALGORITHM: str = env.str("ALGORITHM", default="HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES: int = env.int("ACCESS_TOKEN_EXPIRE_MINUTES", default=30)
-# SENTRY_URL: str = env.str("SENTRY_URL")
+SENTRY_URL: str = env.str("SENTRY_URL")
