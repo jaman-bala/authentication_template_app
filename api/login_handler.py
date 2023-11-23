@@ -12,8 +12,15 @@ from api.schemas import Token
 from db.models import User
 from db.session import get_db
 from security import create_access_token
+from api.actions.auth import get_current_user_from_token
 
 login_router = APIRouter()
+
+
+
+@login_router.get("/protected-resource")
+async def protected_resource(current_user: User = Depends(get_current_user_from_token)):
+    return {"message": "This is a protected resource", "user_email": current_user.email}
 
 
 @login_router.post("/token", response_model=Token)
@@ -32,7 +39,6 @@ async def login_for_access_token(
         expires_delta=access_token_expires,
     )
     return {"access_token": access_token, "token_type": "bearer"}
-
 
 
 

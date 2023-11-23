@@ -23,6 +23,7 @@ async def _get_user_by_email_for_auth(email: str, db: AsyncSession):
     return await user_dal.get_user_by_email(email=email)
 
 
+
 async def authenticate_user(
     email: str, password: str, db: AsyncSession
 ) -> Union[User, None]:
@@ -31,7 +32,10 @@ async def authenticate_user(
         return None
     if not Hasher.verify_password(password, user.hashed_password):
         return None
+    # Добавляем явное зафиксирование транзакции
+    await db.commit()
     return user
+
 
 
 async def get_current_user_from_token(
